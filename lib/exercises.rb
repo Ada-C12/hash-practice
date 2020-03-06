@@ -51,7 +51,7 @@ def top_k_frequent_elements(list, k)
       res << max
     end
   end
-
+  
   return res
 end
 
@@ -61,10 +61,51 @@ end
 #   Each element can either be a ".", or a digit 1-9
 #   The same digit cannot appear twice or more in the same 
 #   row, column or 3x3 subgrid
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(n), n is the length of table
+# Space Complexity: O(n), n is the length of table
 def valid_sudoku(table)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  l = table.length
+  # row, time l * l
+  table.each do |row|
+    return false if !sudoku_helper(row)
+  end
+  
+  # column, time l * 2l
+  l.times do |i|
+    column = []
+    l.times do |j|
+      column << table[j][i]
+    end
+    return false if !sudoku_helper(column)
+  end
+  
+  # area, time  l * 2l
+  x = Integer.sqrt(l)
+  m = n = 0
+  x.times do
+    x.times do 
+      area = []
+      x.times do |i|
+        area += table[n + i][m...(m+x)]
+      end
+      return false if !sudoku_helper(area)
+      m += x
+    end
+    n += x
+    m = 0
+  end
+  return true
 end
 
-def sudoku_helper()
+def sudoku_helper(list)
+  hash = {}
+  list.each do |c|
+    num = c.to_i
+    if num > 0 && hash[num]
+      return false
+    elsif num > 0 && !hash[num]
+      hash[num] = 1
+    end
+  end
+  return true
+end
