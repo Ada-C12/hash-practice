@@ -1,27 +1,20 @@
-
-
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(nlogn) because I sort the letters
+# Space Complexity: O(n)
 
-# def grouped_anagrams(strings)
-#   hash1 = Hash.new
-#   array1 = Array.new
-#   string.each do |word|
-#     word.chars each do |letter|
-#       if hash1.has_key?(letter)
-#         hash1[letter] -= 1
-#       else
-#         hash[letter] = 1
-#       end
-#       if hash1.values.all?{|k, v| v == 0}
-#       array1 << word
-#       strings.delete(word)
-#     else hash2 = Hash.new
-#     end
-#   end
-# end
+def grouped_anagrams(strings)
+  letter_combos = Hash.new
+  strings.each do |word|
+    letters = word.chars.sort
+    sorted_letters = letters.join
+    if !letter_combos.has_key?(sorted_letters)
+      letter_combos[sorted_letters] = [word]
+    else letter_combos[sorted_letters] << word
+    end
+  end
+  return letter_combos.values
+end
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
@@ -54,8 +47,8 @@ end
 #   Each element can either be a ".", or a digit 1-9
 #   The same digit cannot appear twice or more in the same
 #   row, column or 3x3 subgrid
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(n)
+# Space Complexity: O(n)
 def valid_sudoku(table)
   # rows
   table.each do |subarray|
@@ -94,7 +87,6 @@ def valid_sudoku(table)
         left -= 3
         top += 1
       end
-      p sub_box_array
       if !valid_sudoku_helper(sub_box_array)
         return false
       end
@@ -121,4 +113,3 @@ def valid_sudoku_helper(array)
   end
   return true
 end
-
