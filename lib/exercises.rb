@@ -6,14 +6,12 @@
 def grouped_anagrams(strings)
   return [] if strings.empty?
 
-  length = strings.length
-
-  hash = Array.new(length)
+  hash = Array.new(10)
 
   strings.each do |string|
     total = string.bytes.sum
 
-    index = total % length
+    index = total % 10
 
     if !hash[index]
       hash[index] = [string]
@@ -21,6 +19,8 @@ def grouped_anagrams(strings)
       hash[index] << string
     end
   end
+
+  return hash.compact
 end
 
 # This method will return the k most common elements
