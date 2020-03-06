@@ -29,7 +29,7 @@ describe "exercises" do
       end
     end
 
-    xit "will work for strings with no anagrams" do
+    it "will work for strings with no anagrams" do
       # Arrange
       list = ["eat", "ear", "tar", "pop", "pan", "pap"]
 
