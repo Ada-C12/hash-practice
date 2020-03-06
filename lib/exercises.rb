@@ -73,8 +73,8 @@ end
 ### BUT... just because we can prove that a table is NOT valid based on initial presentation, doesn't mean that the puzzle is actually solve-able, does it?
 ### It's like, ok here we are testing to see if this baby is stillborn, but just because it's healthy now doesn't mean that I can guarantee that it's going to grow to natural old age because seomthing might go wrong later?
 ### IDK enough math theory to know if NOT being a true negative now will automatically mean a true positive later.
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(n), need to look at every single value
+# Space Complexity: O(1), I start everyone out with the same inventory{}
 def valid_sudoku(table)
   # check each row
   table.each do |row|
