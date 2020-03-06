@@ -4,7 +4,7 @@
 # Each subarray will have strings which are anagrams of each other
 # Time Complexity: O(n) where n is the number of strings
 # Space Complexity: O(n) where n is the number of strings
-def grouped_anagrams(strings)
+def grouped_anagrams_version_1(strings)
   length = strings.length
   # kind of arbitrary but it seems big enough to get a good spread?
   upper_bound = length * 3
@@ -22,8 +22,12 @@ def grouped_anagrams(strings)
   return get_clean_hash(hash)
 end
 
+def get_numerical_key(string)
+  return string.bytes.sum
+end
+
 def get_hashed_index(string, upper_bound)
-  return string.bytes.sum % upper_bound
+  return get_numerical_key(string) % upper_bound
 end
 
 def get_clean_hash(hash)
@@ -34,6 +38,22 @@ def get_clean_hash(hash)
     end
   end
   return clean
+end
+
+# Time Complexity: O(n) where n is the number of strings
+# Space Complexity: O(n) where n is the number of strings
+def grouped_anagrams(strings)
+  hash = {}
+  strings.each do |string|
+    key = get_numerical_key(string)
+    if hash[key].nil?
+      hash[key] = [string]
+    else
+      hash[key].push(string)
+    end
+  end
+
+  return hash.values
 end
 
 # This method will return the k most common elements
