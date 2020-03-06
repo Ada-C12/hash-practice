@@ -40,12 +40,13 @@ def get_clean_hash(hash)
   return clean
 end
 
-# Time Complexity: O(n) where n is the number of strings
-# Space Complexity: O(n) where n is the number of strings
+# Time Complexity: O(n * m log m) where n is the number of strings and m is the number of characters in the string,
+#                 assuming it's m log m to sort the characters
+# Space Complexity: O(n + m) where n is the number of strings and m is the number of characters in the string
 def grouped_anagrams(strings)
   hash = {}
   strings.each do |string|
-    key = get_numerical_key(string)
+    key = get_key(string)
     if hash[key].nil?
       hash[key] = [string]
     else
@@ -54,6 +55,10 @@ def grouped_anagrams(strings)
   end
 
   return hash.values
+end
+
+def get_key(string)
+  return string.chars.sort.join
 end
 
 # This method will return the k most common elements
