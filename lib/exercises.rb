@@ -91,13 +91,20 @@ def valid_sudoku(table)
           sub_box_array << table[top][left]
           left += 1
         end
+        left -= 3
         top += 1
       end
+      p sub_box_array
       if !valid_sudoku_helper(sub_box_array)
         return false
       end
+      top -= 3
+      left += 3
       right += 3
     end
+    left = 0
+    right = 2
+    top += 3
     bottom += 3
   end
   return true
