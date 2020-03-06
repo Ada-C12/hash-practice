@@ -1,22 +1,44 @@
-
-
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
 # Time Complexity: ?
 # Space Complexity: ?
+def create_hash_table(string)
+  output_hash = {}
+  string.each_char do |char|
+    if output_hash[char]
+      output_hash[char] += 1
+    else
+      output_hash[char] = 1
+    end
+  end
+
+  return output_hash
+end
+
 
 def grouped_anagrams(strings)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  anagrams = {}
+  
+  strings.each do |string|
+    word_hash = create_hash_table(string)
+
+    if anagrams[word_hash]
+      anagrams[word_hash] << string
+    else
+      anagrams[word_hash] = [string]
+    end
+  end
+  
+  return anagrams.values
 end
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(n) where n is number of items in list
+# Space Complexity: O(n) where n is number of items in list
 def get_hash_max(hash)
   hash.each { |k,v| return k if v == hash.values.max }
 end
-
 
 def top_k_frequent_elements(list, k)
   return [] if list.empty?
@@ -32,7 +54,7 @@ def top_k_frequent_elements(list, k)
   end
 
   output = []
-  until output.length == k do
+  k.times do
     maxKey = get_hash_max(nums)
     output << maxKey
     nums.delete(maxKey)
