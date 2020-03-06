@@ -2,11 +2,23 @@
 
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(n*m)
+# Space Complexity: O(n)
 
 def grouped_anagrams(strings)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  return [] if strings.empty?
+  hash = {}
+
+  strings.each do |string|
+    alphabetized = string.chars.sort.join
+
+    if hash[alphabetized]
+      hash[alphabetized] << string
+    else
+      hash[alphabetized] = [string]
+    end
+  end
+  return hash.values
 end
 
 # This method will return the k most common elements
@@ -14,7 +26,7 @@ end
 # Time Complexity: ?
 # Space Complexity: ?
 def top_k_frequent_elements(list, k)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+
 end
 
 
