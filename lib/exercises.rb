@@ -2,19 +2,57 @@
 
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(n), assume the length of each word in strings is constant
+# Space Complexity: O(n)
 
 def grouped_anagrams(strings)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  res = []
+  return res if strings.empty?
+  hash = {}
+  strings.each do |word|
+    key = word.split("").sort.join
+    if hash[key]
+      hash[key] << word
+    else
+      hash[key] == [word]
+    end
+  end
+  hash.each do |k, v|
+    res << v 
+  end
+  return res
 end
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(k * n) ~= O(n) if k is small
+# Space Complexity: O(n)
 def top_k_frequent_elements(list, k)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  res = []
+  return res if list.empty?
+  hash = {}
+  list.each do |num|
+    if hash[num]
+      hash[num] += 1
+    else
+      hash[num] = 1
+    end
+  end
+  
+  k.times do 
+    max = nil
+    hash.each do |num, v|
+      if v && (max.nil? || v > max)
+        max = num 
+      end
+    end
+    if max
+      hash[max] = nil
+      res << max
+    end
+  end
+
+  return res
 end
 
 
@@ -28,3 +66,5 @@ end
 def valid_sudoku(table)
   raise NotImplementedError, "Method hasn't been implemented yet!"
 end
+
+def sudoku_helper()
