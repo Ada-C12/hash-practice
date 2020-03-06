@@ -34,7 +34,7 @@ end
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
-# Time Complexity: O(n) + O(m log m) where n = size of list and m = number of keys in inventory{}
+# Time Complexity: O(n log n) where n = size of list and also n = number of keys in inventory{}
 # Space Complexity: O(n)
 def top_k_frequent_elements(list, k)
   return [] if list == []
@@ -50,10 +50,9 @@ def top_k_frequent_elements(list, k)
   end
   
   # sort the hash values and return as a 2D array
-    # weirdness, if I sorted by value to get the asc_order, then the order of appearance in orig list will be backwards :=(
-    # but if I sort by -value, then order of appearance is preserved and tests will pass
+  # weirdness, if I sorted by value to get the asc_order, then the order of appearance in orig list will be backwards :=(
+  # but if I sort by -value, then order of appearance is preserved and tests will pass
   key_value_arrays_in_desc_order = inventory.sort_by { |key, value| -value }
-  p key_value_arrays_in_desc_order
   
   answer = []
   index = 0
@@ -71,8 +70,85 @@ end
 #   Each element can either be a ".", or a digit 1-9
 #   The same digit cannot appear twice or more in the same 
 #   row, column or 3x3 subgrid
+### BUT... just because we can prove that a table is NOT valid based on initial presentation, doesn't mean that the puzzle is actually solve-able, does it?
+### It's like, ok here we are testing to see if this baby is stillborn, but just because it's healthy now doesn't mean that I can guarantee that it's going to grow to natural old age because seomthing might go wrong later?
+### IDK enough math theory to know if NOT being a true negative now will automatically mean a true positive later.
 # Time Complexity: ?
 # Space Complexity: ?
 def valid_sudoku(table)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  # check each row
+  table.each do |row|
+    return false if !validRow?(row)
+  end
+  
+  # check each column
+  9.times do |column_index|
+    return false if !validColumn?(table, column_index)
+  end
+  
+  # check each 3x3 sub-box
+  leftUpperXYIndexPairs = [
+    [0, 0],
+    [0, 3],
+    [0, 6],
+    [3, 0],
+    [3, 3],
+    [3, 6],
+    [6, 0],
+    [6, 3],
+    [6, 6]
+  ]
+  leftUpperXYIndexPairs.each do |leftUpperindices|
+    return false if !validSubbox?(table, leftUpperindices[0], leftUpperindices[1])
+  end
+  
+  # entire table is valid if haven't failed by now
+  return true
+end
+
+def validRow?(row)
+  inventory = {'1'=>0, '2'=>0, '3'=>0, '4'=>0, '5'=>0, '6'=>0, '7'=>0, '8'=>0, '9'=>0, '.'=>-10}
+  
+  row.each do |number|
+    if inventory[number] > 0
+      return false
+    else
+      inventory[number] += 1
+    end
+  end
+  
+  return true
+end
+
+def validColumn?(table, column_index)
+  inventory = {'1'=>0, '2'=>0, '3'=>0, '4'=>0, '5'=>0, '6'=>0, '7'=>0, '8'=>0, '9'=>0, '.'=>-10}
+  
+  table.each do |row|
+    number = row[column_index]
+    if inventory[number] > 0
+      return false 
+    else  
+      inventory[number] += 1
+    end
+  end
+  
+  return true
+end
+
+def validSubbox?(table, leftUpperRowIndex, leftUpperColIndex)
+  inventory = {'1'=>0, '2'=>0, '3'=>0, '4'=>0, '5'=>0, '6'=>0, '7'=>0, '8'=>0, '9'=>0, '.'=>-10}
+
+  3.times do |rowCount|
+    3.times do |columnCount|
+      number = table[leftUpperRowIndex + rowCount][leftUpperColIndex + columnCount]
+
+      if inventory[number] > 0
+        return false 
+      else
+        inventory[number] += 1
+      end
+    end
+  end
+
+  return true
 end
