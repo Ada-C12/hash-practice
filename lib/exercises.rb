@@ -13,8 +13,32 @@ end
 # in the case of a tie it will select the first occuring element.
 # Time Complexity: ?
 # Space Complexity: ?
+def get_hash_max(hash)
+  hash.each { |k,v| return k if v == hash.values.max }
+end
+
+
 def top_k_frequent_elements(list, k)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  return [] if list.empty?
+  raise ArgumentError.new("K can't be larger then length of list") if k > list.length
+  nums = {}
+
+  list.each do |num|
+    if nums[num]
+      nums[num] += 1
+    else
+      nums[num] = 1
+    end
+  end
+
+  output = []
+  until output.length == k do
+    maxKey = get_hash_max(nums)
+    output << maxKey
+    nums.delete(maxKey)
+  end
+
+  return output
 end
 
 
