@@ -51,7 +51,7 @@ describe "exercises" do
       end
     end
 
-    xit "will work for strings that are all anagrams" do
+    it "will work for strings that are all anagrams" do
       # Arrange
       list = ["eat", "tae", "tea", "eta", "aet", "ate"]
 
