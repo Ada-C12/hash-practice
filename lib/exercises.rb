@@ -1,6 +1,6 @@
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
-# Time Complexity: O(nlogn) because I sort the letters
+# Time Complexity: O(nmlogm) n for number of words, m for letters
 # Space Complexity: O(n)
 
 def grouped_anagrams(strings)
@@ -18,7 +18,7 @@ end
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
-# Time Complexity: O(log(n)) [see two implementations below. Is sort_by faster than max_by?]
+# Time Complexity: O(nlogn) [see two implementations below. Is sort_by faster than max_by?]
 # Space Complexity: O(n)
 def top_k_frequent_elements(list, k)
   hash = Hash.new
@@ -47,7 +47,7 @@ end
 #   Each element can either be a ".", or a digit 1-9
 #   The same digit cannot appear twice or more in the same
 #   row, column or 3x3 subgrid
-# Time Complexity: O(n)
+# Time Complexity: O(n) with n as the number of numbers
 # Space Complexity: O(n)
 def valid_sudoku(table)
   # rows
