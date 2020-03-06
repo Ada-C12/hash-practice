@@ -78,27 +78,27 @@ def valid_sudoku(table)
   end
   
   # sub-boxes
-  horizontal_counter = 0
-  vertical_counter = 0
-  horizontal_limit = 2
-  vertical_limit = 2
+  top = 0
+  bottom = 2
+  left = 0
+  right = 2
   
-  while horizontal_limit <= 8
-    while vertical_limit <=8
+  while bottom <= 8
+    while right <=8
       sub_box_array = Array.new
-      while vertical_counter <= vertical_limit
-        while horizontal_counter <= horizontal_limit
-          sub_box_array << table[vertical_counter][horizontal_counter]
-          horizontal_counter += 1
+      while top <= bottom
+        while left <= right
+          sub_box_array << table[top][left]
+          left += 1
         end
-        vertical_counter += 1
+        top += 1
       end
       if !valid_sudoku_helper(sub_box_array)
         return false
       end
-      vertical_limit += 3
+      right += 3
     end
-    horizontal_limit += 3
+    bottom += 3
   end
   return true
 end
