@@ -111,7 +111,59 @@ def valid_sudoku(table)
     end
   end
 
-  # Check squares
+  # Check top squares
+  index = 0
 
+  3.times do
+    square = []
+    
+    3.times do
+      square << table[0][index]
+      square << table[1][index]
+      square << table[2][index]
+      index += 1
+    end
+
+    unless check_numbers(square)
+      return false
+    end
+  end
+
+  # Check middle squares
+  index = 0
+
+  3.times do
+    square = []
+    
+    3.times do
+      square << table[index][3]
+      square << table[index][4]
+      square << table[index][5]
+      index += 1
+    end
+
+    unless check_numbers(square)
+      return false
+    end
+  end
+
+  # Check bottom squares
+  index = 0
+
+  3.times do
+    square = []
+    
+    3.times do
+      square << table[index][6]
+      square << table[index][7]
+      square << table[index][8]
+      index += 1
+    end
+
+    unless check_numbers(square)
+      return false
+    end
+  end
+  
   return true
 end
