@@ -106,8 +106,75 @@ end
 #   Each element can either be a ".", or a digit 1-9
 #   The same digit cannot appear twice or more in the same
 #   row, column or 3x3 subgrid
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: #O(n) where n is a cell in the table
+# Space Complexity: #O(n) where n is the number of rows (9 in this case)
 def valid_sudoku(table)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  table_size = table[0].length
+  square_size = Math.sqrt(table_size)
+  return false if square_size.to_i != square_size
+
+  return rows_are_valid(table) && columns_are_valid(table, table_size) && squares_are_valid(table, square_size)
+end
+
+def rows_are_valid(table)
+  table.each do |row|
+    row_items = Set.new()
+    row.each do |item|
+      if value_is_invalid(item, row_items)
+        return false
+      else
+        row_items << item.to_i
+      end
+    end
+  end
+  return true
+end
+
+def columns_are_valid(table, table_size)
+  columns = (0...table_size).to_a
+  columns.each do |column|
+    column_items = Set.new()
+    table.each do |row|
+      item = row[column]
+      if value_is_invalid(item, column_items)
+        return false
+      else
+        column_items << item.to_i
+      end
+    end
+  end
+  return true
+end
+
+def value_is_invalid(item, set)
+  num = item.to_i
+  return ((item != ".") && (num < 1 || num > 9 || set.include?(num)))
+end
+
+def check_square(table, square_size, square_row, square_column)
+  square_items = Set.new()
+  (0...square_size).each do |c|
+    (0...square_size).each do |r|
+      column = square_column * square_size + c
+      row = square_row * square_size + r
+      item = table[row][column]
+      if value_is_invalid(item, square_items)
+        return false
+      else
+        square_items << item.to_i
+      end
+    end
+  end
+  return true
+end
+
+def squares_are_valid(table, square_size)
+  is_valid = true
+  (0...square_size).each do |square_column|
+    (0...square_size).each do |square_row|
+      is_valid = check_square(table, square_size, square_row, square_column)
+      return false if !is_valid
+    end
+  end
+  return is_valid
 end
