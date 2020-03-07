@@ -1,8 +1,8 @@
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
-# Time Complexity: ?
-# Space Complexity: ?
-def create_hash_table(string)
+# Time Complexity: O(n * m) where n is number of strings in array and m is number of charcters in longest string
+# Space Complexity: O(n * m) where n is number of strings in array and m is number of charcters in longest string
+def create_char_hash(string)
   output_hash = {}
   string.each_char do |char|
     if output_hash[char]
@@ -20,7 +20,7 @@ def grouped_anagrams(strings)
   anagrams = {}
   
   strings.each do |string|
-    word_hash = create_hash_table(string)
+    word_hash = create_char_hash(string)
 
     if anagrams[word_hash]
       anagrams[word_hash] << string
@@ -71,6 +71,65 @@ end
 #   row, column or 3x3 subgrid
 # Time Complexity: ?
 # Space Complexity: ?
+def generate_values_checker
+  values = {}
+  value = 1
+  9.times do
+    values[value] = false
+    value += 1
+  end
+  return values
+end
+
+def generate_rows_cols_checker
+  rows_cols = {}
+  value = 0
+  9.times do
+    rows_cols[value] = generate_values_checker
+    value += 1
+  end
+  return rows_cols
+end
+
+def generate_subgrids_checker
+  subgrids = {}
+  row = 0
+  col = 0
+  
+  3.times do
+    row += 1
+    3.times do
+      col += 1
+      grid = [row, col]
+      subgrids[grid] = generate_values_checker
+    end
+    col = 0
+  end
+  return subgrids
+end
+
+
 def valid_sudoku(table)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  return false if table.length > 9
+  
+  subgrids = generate_subgrids_checker
+  rows = generate_rows_cols_checker
+  cols = generate_rows_cols_checker
+
+  table.each_with_index do |row, row_index|
+    row.each_with_index do |val, col_index|
+      if val != "."
+        grid = [(col_index/3 + 1), (row_index/3 + 1) ]
+        return false if subgrids[grid][val]
+        subgrids[grid][val] = true;
+        
+        return false if rows[row_index][val]
+        rows[row_index][val] = true;
+        
+        return false if cols[col_index][val]
+        cols[col_index][val] = true;
+      end
+    end
+  end
+  return true
 end
