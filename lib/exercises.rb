@@ -85,18 +85,22 @@ def check_numbers(data)
     end
   end
 
-  return true    
+  return true
 end
 
 def valid_sudoku(table)
   # Check rows
   table.each do |row|
-    check_numbers(row)
+    unless check_numbers(row)
+      return false
+    end
   end
 
   # Check columns
+  puts "im in columns"
 
   # Check squares
 
   return true
+
 end
