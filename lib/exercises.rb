@@ -62,7 +62,6 @@ def top_k_frequent_elements(list, k)
   return answer
 end
 
-
 # This method will return the true if the table is still
 #   a valid sudoku table.
 #   Each element can either be a ".", or a digit 1-9
@@ -70,6 +69,34 @@ end
 #   row, column or 3x3 subgrid
 # Time Complexity: ?
 # Space Complexity: ?
+
+def check_numbers(data)
+  hash = {}
+
+  data.each do |number|
+    integer = number.to_i
+
+    if integer > 0 && integer < 10
+      if hash[integer]
+        return false
+      else
+        hash[integer] = 1
+      end
+    end
+  end
+
+  return true    
+end
+
 def valid_sudoku(table)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  # Check rows
+  table.each do |row|
+    check_numbers(row)
+  end
+
+  # Check columns
+
+  # Check squares
+
+  return true
 end
