@@ -67,9 +67,8 @@ end
 #   Each element can either be a ".", or a digit 1-9
 #   The same digit cannot appear twice or more in the same 
 #   row, column or 3x3 subgrid
-# Time Complexity: ?
-# Space Complexity: ?
-
+# Time Complexity: O(1) because the board is always the same size
+# Space Complexity: O(1) because the board is always the same size
 def check_numbers(data)
   hash = {}
 
@@ -97,10 +96,22 @@ def valid_sudoku(table)
   end
 
   # Check columns
-  puts "im in columns"
+  9.times do |i|
+    column = []
+
+    index = 0
+
+    while index < 9
+      column << table[index][i]
+      index += 1
+    end
+
+    unless check_numbers(column)
+      return false
+    end
+  end
 
   # Check squares
 
   return true
-
 end
