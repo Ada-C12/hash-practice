@@ -87,6 +87,27 @@ def check_numbers(data)
   return true
 end
 
+def check_square(table, column)
+  index = 0
+
+  3.times do
+    square = []
+    
+    3.times do
+      square << table[column][index]
+      square << table[column + 1][index]
+      square << table[column + 2][index]
+      index += 1
+    end
+
+    unless check_numbers(square)
+      return false
+    end
+  end
+
+  return true
+end
+
 def valid_sudoku(table)
   # Check rows
   table.each do |row|
@@ -112,58 +133,19 @@ def valid_sudoku(table)
   end
 
   # Check top squares
-  index = 0
-
-  3.times do
-    square = []
-    
-    3.times do
-      square << table[0][index]
-      square << table[1][index]
-      square << table[2][index]
-      index += 1
-    end
-
-    unless check_numbers(square)
-      return false
-    end
+  unless check_square(table, 0)
+    return false
   end
 
   # Check middle squares
-  index = 0
-
-  3.times do
-    square = []
-    
-    3.times do
-      square << table[index][3]
-      square << table[index][4]
-      square << table[index][5]
-      index += 1
-    end
-
-    unless check_numbers(square)
-      return false
-    end
+  unless check_square(table, 3)
+    return false
   end
 
   # Check bottom squares
-  index = 0
-
-  3.times do
-    square = []
-    
-    3.times do
-      square << table[index][6]
-      square << table[index][7]
-      square << table[index][8]
-      index += 1
-    end
-
-    unless check_numbers(square)
-      return false
-    end
+  unless check_square(table, 6)
+    return false
   end
-  
+
   return true
 end
