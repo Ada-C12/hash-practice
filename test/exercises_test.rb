@@ -1,7 +1,7 @@
 require_relative "test_helper"
 
 describe "exercises" do
-  xdescribe "grouped_anagrams" do
+  describe "grouped_anagrams" do
     it "will return [] for an empty array" do
       #Arrange
       list = []

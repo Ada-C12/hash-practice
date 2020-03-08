@@ -2,17 +2,28 @@
 
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(n2) .sort & .join on each word is its own O(n)?
+# Space Complexity: O(n)
 
 def grouped_anagrams(strings)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  result = Hash.new { |h, k| h[k] = [] } #create a new hash w/ value as an empty array
+
+  strings.each do |word|
+    if result[word.chars.sort.join]
+      result[word.chars.sort.join] << word #check by sorting the words in alphabetical order
+    else
+      result[word.chars.sort.join] << word
+    end
+  end
+  
+  return result.values
+
 end
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(n) (we're iterating over the given list, and then the hash created)
+# Space Complexity: O(n) 
 def top_k_frequent_elements(list, k)
   hash = {}
 
@@ -27,7 +38,7 @@ def top_k_frequent_elements(list, k)
   # sorting the hash by values in ascending order
   output = hash.select {|k,v| -v}
 
-  return output.keys.first(k) #.keys will return an array
+  return output.keys.first(k) #.keys will return an array, this is a O(1) operation?
 
 end
 
