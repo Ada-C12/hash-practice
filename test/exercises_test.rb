@@ -1,7 +1,7 @@
 require_relative "test_helper"
 
 describe "exercises" do
-  describe "grouped_anagrams" do
+  xdescribe "grouped_anagrams" do
     it "will return [] for an empty array" do
       #Arrange
       list = []
@@ -68,7 +68,7 @@ describe "exercises" do
     end
   end
 
-  xdescribe "top_k_frequent_elements" do
+  describe "top_k_frequent_elements" do
     it "works with example 1" do
       # Arrange
       list = [1,1,1,2,2,3]

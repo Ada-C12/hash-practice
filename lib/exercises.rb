@@ -14,7 +14,21 @@ end
 # Time Complexity: ?
 # Space Complexity: ?
 def top_k_frequent_elements(list, k)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  hash = {}
+
+  list.each do |num|
+    if hash[num]
+      hash[num] += 1
+    else
+      hash[num] = 1
+    end
+  end
+
+  # sorting the hash by values in ascending order
+  output = hash.select {|k,v| -v}
+
+  return output.keys.first(k) #.keys will return an array
+
 end
 
 
