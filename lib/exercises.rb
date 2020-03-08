@@ -1,12 +1,29 @@
-
-
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
 # Time Complexity: ?
 # Space Complexity: ?
 
 def grouped_anagrams(strings)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  anagram_tracker = {}
+  result = []
+
+  strings.each do |word|
+    word_frequency_hash = {}
+    word.chars.each do |letter|
+      if word_frequency_hash.key?(letter)
+        word_frequency_hash[letter] += 1
+      else
+        word_frequency_hash[letter] = 1
+      end
+    end
+
+    if !anagram_tracker.key?(word_frequency_hash)
+        anagram_tracker[word_frequency_hash] = []
+    end
+    anagram_tracker[word_frequency_hash] << word
+  end
+
+  return anagram_tracker.values
 end
 
 # This method will return the k most common elements
@@ -14,9 +31,30 @@ end
 # Time Complexity: ?
 # Space Complexity: ?
 def top_k_frequent_elements(list, k)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
-end
+  result = []
+  return result if list.empty?
+  
+  freq_tracker = {}
 
+  list.each do |num|
+    if !freq_tracker.key?(num)
+      freq_tracker[num] = 1
+    else
+      freq_tracker[num] += 1
+    end
+  end
+
+  sorted_tracker = freq_tracker.sort_by {|num, freq| -freq}
+  slice = sorted_tracker[0...k]
+
+  i = 0
+  k.times do
+    result << slice[i][0]
+    i += 1
+  end
+
+  return result
+end
 
 # This method will return the true if the table is still
 #   a valid sudoku table.
