@@ -45,18 +45,10 @@ def top_k_frequent_elements(list, k)
   end
 
   sorted_tracker = freq_tracker.sort_by {|num, freq| -freq}
-<<<<<<< HEAD
 
   i = 0
   k.times do
     result << sorted_tracker[i][0]
-=======
-  slice = sorted_tracker[0...k]
-
-  i = 0
-  k.times do
-    result << slice[i][0]
->>>>>>> 9942f3d7e6e430eddd63ae3f964386a6a7f48d1e
     i += 1
   end
 
