@@ -1,5 +1,3 @@
-
-
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
 # Time Complexity: ?
