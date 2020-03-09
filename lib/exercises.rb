@@ -6,7 +6,7 @@
 # Space Complexity: ?
 
 def grouped_anagrams(strings)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  # raise NotImplementedError, "Method hasn't been implemented yet!"
 end
 
 # This method will return the k most common elements
@@ -14,7 +14,7 @@ end
 # Time Complexity: ?
 # Space Complexity: ?
 def top_k_frequent_elements(list, k)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  # raise NotImplementedError, "Method hasn't been implemented yet!"
 end
 
 
