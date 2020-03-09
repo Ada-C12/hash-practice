@@ -7,7 +7,18 @@
 
 def grouped_anagrams(strings)
   # raise NotImplementedError, "Method hasn't been implemented yet!"
+  hash = {}
+  strings.each do |string|
+    sorted_string = string.split("").sort.join
+    if hash[sorted_string]
+      hash[sorted_string] << string
+    else 
+      hash[sorted_string] = [string]
+    end
+  end
+  return hash.values
 end
+
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
