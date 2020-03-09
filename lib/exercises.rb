@@ -36,9 +36,13 @@ end
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(n)
+# Space Complexity: O(n)
 def top_k_frequent_elements(list, k)
+  if list.empty? 
+    return list
+  end
+  
   counter_hash = {}
   final_elements = []
   list.each do |element|
@@ -54,7 +58,7 @@ def top_k_frequent_elements(list, k)
   k.times do |element|
     max = counter_hash.key(counter_hash.values.max)
     new_elements << max
-    hash.delete(max)
+    counter_hash.delete(max)
   end
   return new_elements
 end
