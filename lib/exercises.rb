@@ -26,7 +26,8 @@ end
 # Time Complexity: ?
 # Space Complexity: ?
 def top_k_frequent_elements(list, k)
-  return [] if list.empty?
+  return list if list.empty? || list.size == 2
+
   elements = []
   hash = {}
 
@@ -41,7 +42,7 @@ def top_k_frequent_elements(list, k)
   k.times do
     max_key = hash.key(hash.values.max)
     elements << max_key
-    hash = hash.delete(max_key)
+    hash.delete(max_key)
   end
   return elements
 
