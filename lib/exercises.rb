@@ -2,7 +2,7 @@
 
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
-# Time Complexity: O(n) + O(log m)
+# Time Complexity: O(n) + O(m log m)
 # Space Complexity: O(n)
 
 def grouped_anagrams(strings)
@@ -28,7 +28,7 @@ end
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
-# Time Complexity: O(n)
+# Time Complexity: O(n^2)
 # Space Complexity: O(n)
 def top_k_frequent_elements(list, k)
   if list.empty? || list.size == 1
