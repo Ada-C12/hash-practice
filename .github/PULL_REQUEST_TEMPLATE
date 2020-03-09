@@ -6,10 +6,19 @@ Congratulations! You're submitting your assignment!
 
 Question | Answer
 :------------- | :-------------
-Why is a good Hash Function Important? | 
-How can you judge if a hash function is good or not? | 
-Is there a perfect hash function?  If so what is it? | 
-Describe a strategy to handle collisions in a hash table | 
-Describe a situation where a hash table wouldn't be as useful as a binary search tree | 
-What is one thing that is more clear to you on hash tables now | 
+1. Why is a good Hash Function Important? | To provide a time complexity of O(1) for insert, delete and search|
+
+2. How can you judge if a hash function is good or not? | A good hash function has the following attributes:
+- Fast computation of the hash value 
+- Hash values are uniformly distributed
+- Keys that are close have hash values that are far apart
+- Hashing appears to be random (hard to deduce the original object – this is why hashing is also used in cryptography)|
+
+3. Is there a perfect hash function?  If so what is it? |Yes, A hash function for which there are no collisions is called a "perfect hash function"|
+
+4. Describe a strategy to handle collisions in a hash table | Separate Chaining: uses a linked list to store the collided keys|
+
+5. Describe a situation where a hash table wouldn't be as useful as a binary search tree | Hash tables are not good for finding ordered data. Linked list and binary search tree can get us the min and max in O(n) and O(log n) time.|
+
+6. What is one thing that is more clear to you on hash tables now | I learned the ways to handle collisions in a hash table. Need more practice|
 
