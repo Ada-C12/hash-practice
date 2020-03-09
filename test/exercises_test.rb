@@ -3,6 +3,7 @@ require_relative "test_helper"
 describe "exercises" do
   describe "grouped_anagrams" do
     it "will return [] for an empty array" do
+
       #Arrange
       list = []
       
@@ -11,6 +12,7 @@ describe "exercises" do
     end
 
     it "will work for the README example" do
+    
       # Arrange
       list = ["eat", "tea", "tan", "ate", "nat", "bat"]
 
@@ -30,6 +32,7 @@ describe "exercises" do
     end
 
     it "will work for strings with no anagrams" do
+      
       # Arrange
       list = ["eat", "ear", "tar", "pop", "pan", "pap"]
 
@@ -52,6 +55,7 @@ describe "exercises" do
     end
 
     it "will work for strings that are all anagrams" do
+      
       # Arrange
       list = ["eat", "tae", "tea", "eta", "aet", "ate"]
 
@@ -68,8 +72,9 @@ describe "exercises" do
     end
   end
 
-  xdescribe "top_k_frequent_elements" do
+  describe "top_k_frequent_elements" do
     it "works with example 1" do
+      
       # Arrange
       list = [1,1,1,2,2,3]
       k = 2
@@ -82,6 +87,7 @@ describe "exercises" do
     end
 
     it "works with example 2" do
+      
       # Arrange
       list = [1]
       k = 1
@@ -94,6 +100,7 @@ describe "exercises" do
     end
 
     it "will return [] for an empty array" do
+      
       # Arrange
       list = []
       k = 1
@@ -106,6 +113,7 @@ describe "exercises" do
     end
 
     it "will work for an array with k elements all unique" do
+      
       # Arrange
       list = [1, 2, 3]
       k = 3
@@ -118,6 +126,7 @@ describe "exercises" do
     end
 
     it "will work for an array when k is 1 and several elements appear 1 time (HINT Pick the 1st one)" do
+      
       # Arrange
       list = [1, 2, 3]
       k = 1
@@ -133,6 +142,7 @@ describe "exercises" do
 
   xdescribe "valid sudoku" do
     it "works for the table given in the README" do
+      skip
       # Arrange
       table = [
         ["5","3",".",".","7",".",".",".","."],
@@ -154,6 +164,7 @@ describe "exercises" do
     end
 
     it "fails for the table given in the README" do
+      skip
       # Arrange
       table = [
         ["8","3",".",".","7",".",".",".","."],
@@ -175,6 +186,7 @@ describe "exercises" do
     end
 
     it "fails for a duplicate number in a sub-box" do
+      skip
       # Arrange
       table = [
         ["5","3",".",".","7",".",".",".","."],
@@ -196,6 +208,7 @@ describe "exercises" do
     end
 
     it "fails for a duplicate number in a bottom right sub-box" do
+      skip
       # Arrange
       table = [
         ["5","3",".",".","7",".",".",".","."],
