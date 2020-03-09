@@ -26,8 +26,23 @@ end
 # Space Complexity: ?
 def top_k_frequent_elements(list, k)
   # raise NotImplementedError, "Method hasn't been implemented yet!"
+  hash = {}
+  output = []
+  return list if list.empty?
+  
+  list.each do |element|
+    if hash[element]
+      hash[element] += 1
+    else
+      hash[element] = 1
+    end
+  end
+  
+  k.times do |element|
+    output << hash.sort[element][0]
+  end
+  return output
 end
-
 
 # This method will return the true if the table is still
 #   a valid sudoku table.
