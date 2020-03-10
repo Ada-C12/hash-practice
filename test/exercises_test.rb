@@ -1,34 +1,5 @@
 require_relative "test_helper"
 
-describe "exercises" do
-  describe "grouped_anagrams" do
-    it "will return [] for an empty array" do
-      #Arrange
-      list = []
-      
-      # Act-Assert
-      expect(grouped_anagrams(list)).must_equal []
-    end
-
-    it "will work for the README example" do
-      # Arrange
-      list = ["eat", "tea", "tan", "ate", "nat", "bat"]
-
-      # Act
-      answer = grouped_anagrams(list)
-
-      expected_answer = [
-        ["ate","eat","tea"],
-        ["nat","tan"],
-        ["bat"]
-      ]
-
-      # Assert
-      answer.each_with_index do |array, index|
-        expect(expected_answer).must_include array.sort
-      end
-    end
-
     it "will work for strings with no anagrams" do
       # Arrange
       list = ["eat", "ear", "tar", "pop", "pan", "pap"]
