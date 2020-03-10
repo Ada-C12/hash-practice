@@ -10,8 +10,8 @@ def grouped_anagrams(strings)
   
   hash = {}
 
-  strings.each do |word|
-    temp = word.chars.sort.join
+  strings.each do |word| # O(n)
+    temp = word.chars.sort.join # O(m log m)
     if hash[temp]
       hash[temp] << word
     else
@@ -25,7 +25,7 @@ end
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
-# Time Complexity: O(m + n^2)
+# Time Complexity: O(m + n)
 # Space Complexity: O(n)
 def top_k_frequent_elements(list, k)
   if list.empty? || list.size == 1
@@ -35,7 +35,7 @@ def top_k_frequent_elements(list, k)
   answer = []
   hash = {}
 
-  list.each do |num|
+  list.each do |num| # O(m)
     if hash[num]
       hash[num] += 1
     else
@@ -44,9 +44,9 @@ def top_k_frequent_elements(list, k)
   end
 
   k.times do
-    max = hash.key(hash.values.max)
+    max = hash.key(hash.values.max) # O(n)
     answer << max
-    hash.delete(max)
+    hash.delete(max) # O(n)
   end
 
   return answer
