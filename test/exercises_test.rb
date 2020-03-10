@@ -1,5 +1,6 @@
 require_relative "test_helper"
 
+  describe "grouped_anagrams" do
     it "will work for strings with no anagrams" do
       # Arrange
       list = ["eat", "ear", "tar", "pop", "pan", "pap"]
@@ -37,7 +38,6 @@ require_relative "test_helper"
         expect(expected_answer).must_include array.sort
       end
     end
-  end
 
   xdescribe "top_k_frequent_elements" do
     it "works with example 1" do
