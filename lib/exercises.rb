@@ -24,7 +24,7 @@ def grouped_anagrams(strings)
 
   end
 
-  # return the values (array of words with matching letters) for each standardized string
+  # return the values (array of words that are anagrams) for each standardized string
   return hash.values
 
 end
@@ -34,7 +34,35 @@ end
 # Time Complexity: ?
 # Space Complexity: ?
 def top_k_frequent_elements(list, k)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+
+  return [] if list.empty?
+  
+  # create a hash that has each element as key and number of occurrences as value: [1, 1, 1, 2, 2, 3] => {1=>3, 2=>2, 3=>1}
+  hash = {}
+  list.each do |element|
+    if hash[element].nil?
+      hash[element] = 1
+    else 
+      hash[element] += 1
+    end
+  end
+  
+  # get the keys associated with k max values. There is almost certainly a better way to do this 
+  max_arrays = hash.max_by(k) {|key, value| value}  # this returns k hash pairs as arrays: {1=>3, 2=>2, 3=>1}, k = 2 => [[1, 3], [2, 2]]
+
+  # return the first element from each array
+  max_keys = []
+  max_arrays.each do |array|
+    if k == 1
+      # "will work for an array when k is 1 and several elements appear 1 time" situation: return the first key with value of 1 in the element counts hash
+      max_keys << hash.min[0]
+    else
+      max_keys << array[0]
+    end
+  end
+
+  return max_keys
+
 end
 
 
