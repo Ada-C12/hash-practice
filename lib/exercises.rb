@@ -2,8 +2,8 @@
 
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(n) where n is the number of strings for the hashing function but I'm not sure how split/sort/join factors in (maybe O of m where m is the number of letters in all the strings?). 
+# Space Complexity: O(n) because we are creating a new place in memory for each string
 
 def grouped_anagrams(strings)
 
@@ -24,7 +24,7 @@ def grouped_anagrams(strings)
 
   end
 
-  # return the values (arrays of words with matching letters) for each standardized string
+  # return the values (array of words with matching letters) for each standardized string
   return hash.values
 
 end
