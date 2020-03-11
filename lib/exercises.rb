@@ -5,16 +5,78 @@
 # Time Complexity: ?
 # Space Complexity: ?
 
-def grouped_anagrams(strings)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+def grouped_anagrams(string_array)
+  if string_array.length == 0
+    return []
+  end
+  
+  reference_hash = {}
+  
+  string_array.each do |string|
+    
+    temp = string_sorter(string)
+    
+    if reference_hash.keys.include?(temp)
+      reference_hash[temp].push(string)
+    else
+      reference_hash[temp] = ["#{string}"]
+    end
+  end
+  
+  return_array = []
+  
+  reference_hash.each_value do |value|
+    return_array.push(value)
+  end
+  
+  return return_array
+  
 end
+
+def string_sorter(string)
+  return_array = []
+  string.each_char do |char|
+    return_array.push(char)
+  end
+  return_array.sort!
+  return_string = return_array.join
+  return return_string
+end
+
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
 # Time Complexity: ?
 # Space Complexity: ?
 def top_k_frequent_elements(list, k)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  if list.length == 0 
+    return []
+  end
+  
+  top_frequency = 0
+  
+  reference_hash = {}
+  
+  list.each do |string|
+    if reference_hash.keys.include?(string)
+      reference_hash[string] += 1
+    else
+      reference_hash[string] = 1
+    end
+  end
+  
+  reference_hash.sort_by {|key, value| value}
+  temporary_array = reference_hash.keys
+  i = 0
+  return_array = []
+  
+  until i == k do
+    return_array.push(temporary_array[i])
+    i += 1
+  end
+  
+  return return_array
+  
 end
 
 
@@ -26,5 +88,5 @@ end
 # Time Complexity: ?
 # Space Complexity: ?
 def valid_sudoku(table)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
+  
 end
