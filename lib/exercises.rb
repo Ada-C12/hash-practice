@@ -2,7 +2,7 @@
 
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
-# Time Complexity: O(n) + O(m log m)  where n = strings[] size and m = length of each word therein.
+# Time Complexity: O(n) * O(m log m)  where n = strings[] size and m = length of each word therein.
 # Space Complexity: O(n) 
 
 def grouped_anagrams(strings)
@@ -137,11 +137,11 @@ end
 
 def validSubbox?(table, leftUpperRowIndex, leftUpperColIndex)
   inventory = {'1'=>0, '2'=>0, '3'=>0, '4'=>0, '5'=>0, '6'=>0, '7'=>0, '8'=>0, '9'=>0, '.'=>-10}
-
+  
   3.times do |rowCount|
     3.times do |columnCount|
       number = table[leftUpperRowIndex + rowCount][leftUpperColIndex + columnCount]
-
+      
       if inventory[number] > 0
         return false 
       else
@@ -149,6 +149,6 @@ def validSubbox?(table, leftUpperRowIndex, leftUpperColIndex)
       end
     end
   end
-
+  
   return true
 end
