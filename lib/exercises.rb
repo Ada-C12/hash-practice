@@ -27,7 +27,7 @@ end
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
 # Time Complexity: O(n+k) where n is the number of elements in list and k is the k-value
-# Space Complexity: ?
+# Space Complexity: O(n) where n is the number of left elements in list...a new hash and new array are created
 def top_k_frequent_elements(list, k)
   return [] if list.empty?
 
