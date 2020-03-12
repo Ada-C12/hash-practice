@@ -48,9 +48,48 @@ end
 # Time Complexity: ?
 # Space Complexity: ?
 def top_k_frequent_elements(list, k)
-  raise NotImplementedError, "Method hasn't been implemented yet!"
-end
+  return [] if list.empty?
 
+  repetitions_per_element = {}
+  i = 0
+  j = 0
+
+  while j < list.length + 1 do 
+    if list[i] == list[j]
+      j +=1
+    else 
+      if repetitions_per_element[j-i] == nil
+        repetitions_per_element[j-i] = [list[i]]
+      else 
+        repetitions_per_element[j-i] << list[i]
+      end
+      i = j
+    end
+  end
+
+  top_k_elements = []
+  repetitions = []
+
+  repetitions_per_element.keys.each do |repetition|
+    repetitions << repetition
+  end
+
+  repetitions = repetitions.sort
+
+  i = repetitions.length - 1
+  
+  while k > top_k_elements.length 
+      max = repetitions[i]
+      repetitions_per_element[max].each do |element|
+        if k != top_k_elements.length
+          top_k_elements  << element 
+        end
+      end
+      i -= 1
+  end
+
+  return top_k_elements
+end
 
 # This method will return the true if the table is still
 #   a valid sudoku table.
