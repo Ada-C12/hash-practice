@@ -68,7 +68,7 @@ describe "exercises" do
     end
   end
 
-  xdescribe "top_k_frequent_elements" do
+  describe "top_k_frequent_elements" do
     it "works with example 1" do
       # Arrange
       list = [1,1,1,2,2,3]
@@ -139,7 +139,7 @@ describe "exercises" do
     end
   end
 
-  xdescribe "valid sudoku" do
+  describe "valid sudoku" do
     it "works for the table given in the README" do
       # Arrange
       table = [
@@ -182,7 +182,7 @@ describe "exercises" do
       expect(valid).must_equal false
     end
 
-    it "fails for a duplicate number in a sub-box" do
+    it "fails for a duplicate number in top left sub-box" do
       # Arrange
       table = [
         ["5","3",".",".","7",".",".",".","."],
@@ -190,6 +190,27 @@ describe "exercises" do
         [".","9","8",".",".",".",".","6","."],
         ["8",".",".",".","6",".",".",".","3"],
         ["4",".",".","8",".","3",".",".","1"],
+        ["7",".",".",".","2",".",".",".","6"],
+        [".","6",".",".",".",".","2","8","."],
+        [".",".",".","4","1","9",".",".","5"],
+        [".",".",".",".","8",".",".","7","9"]
+      ]
+
+      # Act
+      valid = valid_sudoku(table)
+
+      # Assert
+      expect(valid).must_equal false
+    end
+
+    it "fails for a duplicate number in middle middle sub-box" do
+      # Arrange
+      table = [
+        ["5","3",".",".","7",".",".",".","."],
+        ["6",".","4","1","9","5",".",".","."],
+        [".","9","8",".",".",".",".","6","."],
+        ["8",".",".",".","6",".",".",".","3"],
+        ["4",".",".","2",".","3",".",".","1"],
         ["7",".",".",".","2",".",".",".","6"],
         [".","6",".",".",".",".","2","8","."],
         [".",".",".","4","1","9",".",".","5"],
@@ -223,5 +244,27 @@ describe "exercises" do
       # Assert
       expect(valid).must_equal false
     end
+
+    it "fails for a duplicate number in a row" do
+      # Arrange
+      table = [
+        ["5","3",".",".","5",".",".",".","."],
+        ["6",".","2","1","9","5",".",".","."],
+        [".","9","8",".",".",".",".","6","."],
+        ["8",".",".",".","6",".",".",".","3"],
+        ["4",".",".","8",".","3",".",".","1"],
+        ["7",".",".",".","2",".",".",".","6"],
+        [".","6",".",".",".",".","2","8","."],
+        [".",".",".","4","1","9","8",".","5"],
+        [".",".",".",".","8",".",".","7","9"]
+      ]
+
+      # Act
+      valid = valid_sudoku(table)
+
+      # Assert
+      expect(valid).must_equal false
+    end
+
   end
 end
