@@ -7,6 +7,7 @@
 
 def grouped_anagrams(strings)
   hash = {}
+  
   strings.each do |string|
     baby_hash = {}
     string.each_char do |char|
@@ -23,11 +24,7 @@ def grouped_anagrams(strings)
    end
   end
 
-  output = []
-  hash.each do |k, v| 
-    output << v
-  end
-  return output
+  return hash.values
 end
 
 # This method will return the k most common elements
