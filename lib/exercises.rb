@@ -23,11 +23,13 @@ end
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
-# Time Complexity: O(n+m)
+# Time Complexity: O(n)
 # Space Complexity: O(n)
 def top_k_frequent_elements(list, k)
   hash = {}
   result = []
+  
+  return result if list.empty?
   
   list.each do |num|
     if hash[num].nil?
@@ -35,16 +37,22 @@ def top_k_frequent_elements(list, k)
     else
       hash[num] += 1
     end
-  end
+  end 
   
-  i = 1
-  hash.each do |key, value|
-    if i <= k
-      result << key
-      i += 1
+  k.times do
+    max = nil
+    
+    hash.each do |num,v|  
+      if v && (max.nil? || v > max)
+        max = num
+      end
     end 
-  end
-  
+    
+    if max 
+      hash[max] = nil
+      result << max
+    end
+  end 
   return result
 end 
 
@@ -57,6 +65,8 @@ end
 #   row, column or 3x3 subgrid
 # Time Complexity: ?
 # Space Complexity: ?
+
+# Check alices solution
 # def valid_sudoku(table)
 #   raise NotImplementedError, "Method hasn't been implemented yet!"
 # end
