@@ -63,10 +63,43 @@ end
 #   Each element can either be a ".", or a digit 1-9
 #   The same digit cannot appear twice or more in the same 
 #   row, column or 3x3 subgrid
-# Time Complexity: ?
-# Space Complexity: ?
+# Time Complexity: O(1) if fixed number of squares
+# Space Complexity: O(1) if fixed number of squars
+require 'set'
 
-# Check alices solution
-# def valid_sudoku(table)
-#   raise NotImplementedError, "Method hasn't been implemented yet!"
-# end
+def valid_sudoku(table)
+  set = Set.new()
+  x = 0
+  y = 0
+  
+  while x < 9
+    while y < 9
+      if table[x][y] != "."
+        char = (table[x][y]).to_s
+        
+        if !set.add?(char + " in row " + x.to_s) ||
+          !set.add?(char + " in column " + y.to_s) ||
+          !set.add?(char + " in square " + (x/3).to_s + "," + (y/3).to_s)
+          
+          return false
+        end 
+      end
+      y += 1
+    end 
+    y = 0
+    x += 1
+  end
+  return true
+end 
+
+# pp valid_sudoku([
+#   ["8","3",".",".","7",".",".",".","."],
+#   ["6",".",".","1","9","5",".",".","."],
+#   [".","9","8",".",".",".",".","6","."],
+#   ["8",".",".",".","6",".",".",".","3"],
+#   ["4",".",".","8",".","3",".",".","1"],
+#   ["7",".",".",".","2",".",".",".","6"],
+#   [".","6",".",".",".",".","2","8","."],
+#   [".",".",".","4","1","9",".",".","5"],
+#   [".",".",".",".","8",".",".","7","9"]
+#   ])
