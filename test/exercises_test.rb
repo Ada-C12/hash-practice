@@ -5,7 +5,7 @@ describe "exercises" do
     it "will return [] for an empty array" do
       #Arrange
       list = []
-      
+
       # Act-Assert
       expect(grouped_anagrams(list)).must_equal []
     end
@@ -68,7 +68,7 @@ describe "exercises" do
     end
   end
 
-  xdescribe "top_k_frequent_elements" do
+  describe "top_k_frequent_elements" do
     it "works with example 1" do
       # Arrange
       list = [1,1,1,2,2,3]
@@ -139,7 +139,7 @@ describe "exercises" do
     end
   end
 
-  xdescribe "valid sudoku" do
+  describe "valid sudoku" do
     it "works for the table given in the README" do
       # Arrange
       table = [
