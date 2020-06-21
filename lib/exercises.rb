@@ -1,94 +1,59 @@
 
-
 # This method will return an array of arrays.
 # Each subarray will have strings which are anagrams of each other
-# Time Complexity: n^2 as for each word in the list I'm iterating over the letters.
+# Time Complexity: O(n * m) as for each word in the list I'm iterating over the letters.
+# # Space Complexity: O(n).
 
-# # Space Complexity: O(n) because if none of the words are anagrams, 
-# I will duplicate the array. Also, I will create a hash were each key is each word.
+def grouped_anagrams(list_strings)
+  anagrams = Hash.new()  
 
+  list_strings.each do |s| 
+    key = s.downcase.chars.sort.join          
 
-def grouped_anagrams(strings)
-  alphabet = {}
-  words_same_value = {}
-  
-  index = 0
-  anagram_array = []
-  value = 0
-  
-    strings.each do |word|
-      word_value = 0
-
-      word.each_char do |letter|  
-        if alphabet[letter] == nil
-          alphabet[letter] = value + 1
-          value += 1
-          word_value += alphabet[letter]
-        else
-          word_value += alphabet[letter]
-        end
-      end
-
-      if words_same_value[word_value] == nil
-        words_same_value[word_value] = [word] 
-      else 
-        words_same_value[word_value] << word
-      end
+    if !anagrams.has_key?(key)
+      anagrams[key] = [s]
+    else
+      anagrams[key].push(s)
     end
+  end
 
-    words_same_value.keys do |sum|
-      anagram_array << sum
-    end  
+  result = Array.new() 
+  anagrams.each do |k,v| 
+    result.push(v)
+  end
 
-    return anagram_array
+  return result
 end
 
 # This method will return the k most common elements
 # in the case of a tie it will select the first occuring element.
-# Time Complexity: ?
-# Space Complexity: ?
-def top_k_frequent_elements(list, k)
-  return [] if list.empty?
+# Time Complexity: O(kn)
+# Space Complexity: O(n)
+def top_k_frequent_elements(list, k)  
+  repetitions = Hash.new 
 
-  repetitions_per_element = {}
-  i = 0
-  j = 0
-
-  while j < list.length + 1 do 
-    if list[i] == list[j]
-      j +=1
+  list.each do |n| 
+    if !repetitions.has_key?(n) 
+      repetitions[n] = 1     
     else 
-      if repetitions_per_element[j-i] == nil
-        repetitions_per_element[j-i] = [list[i]]
-      else 
-        repetitions_per_element[j-i] << list[i]
-      end
-      i = j
+      repetitions[n] += 1
     end
   end
 
-  top_k_elements = []
-  repetitions = []
+  result = []        
+  while k != 0       
+    max = repetitions.values.max  
 
-  repetitions_per_element.keys.each do |repetition|
-    repetitions << repetition
-  end
-
-  repetitions = repetitions.sort
-
-  i = repetitions.length - 1
-  
-  while k > top_k_elements.length 
-      max = repetitions[i]
-      repetitions_per_element[max].each do |element|
-        if k != top_k_elements.length
-          top_k_elements  << element 
-        end
+    list.each do |n|  
+      if repetitions.has_key?(n) && repetitions[n] == max    
+        result.push(n)         
+        repetitions.delete(n)   
+        break
       end
-      i -= 1
+    end
+    k -= 1
   end
-
-  return top_k_elements
+  return result
 end
 
 # This method will return the true if the table is still
